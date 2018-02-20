@@ -5,7 +5,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MultpleItemsViewModifierProtocol.h"
+#import "MultipleItemsViewModifierProtocol.h"
 
 @interface TableViewModifier : NSObject<MultipleItemsViewModifierProtocol>
 
