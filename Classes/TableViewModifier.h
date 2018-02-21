@@ -3,8 +3,8 @@
 //
 //  Created by Vadim Temnogrudov on 20/02/2018.
 //
-#import "MultipleItemsViewModifierProtocol.h"
 #import <Foundation/Foundation.h>
+#import "MultipleItemsViewModifierProtocol.h"
 
 @interface TableViewModifier : NSObject<MultipleItemsViewModifierProtocol>
 
