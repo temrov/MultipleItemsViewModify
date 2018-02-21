@@ -22,7 +22,7 @@ typedef NSArray<NSIndexPath *> *_Nonnull (^multipleItemsViewModifyBlock)(void);
  */
 @protocol MultipleItemsViewModifierProtocol
 
-@property (nullable, nonatomic, weak) NSObject<IFMultipleItemsViewModifierDelegate> *delegate;
+@property (nullable, nonatomic, weak) NSObject<MultipleItemsViewModifierDelegate> *delegate;
 
 /**
  * Method performs animated model and view modifications atomically.

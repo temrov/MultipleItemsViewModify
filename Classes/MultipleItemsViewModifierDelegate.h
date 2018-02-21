@@ -10,9 +10,9 @@
 
 @optional
 // called directly to modifications of view
-- (void)modifier:(nonnull NSObject<IFMultipleItemsViewModifierProtocol> *)modifier willUpdateView:(nullable UIView *)view;
+- (void)modifier:(nonnull NSObject<MultipleItemsViewModifierProtocol> *)modifier willUpdateView:(nullable UIView *)view;
 
 // called immediately after modification of view
-- (void)modifier:(nonnull NSObject<IFMultipleItemsViewModifierProtocol> *)modifier didUpdatedView:(nullable UIView *)view;
+- (void)modifier:(nonnull NSObject<MultipleItemsViewModifierProtocol> *)modifier didUpdatedView:(nullable UIView *)view;
 
 @end
