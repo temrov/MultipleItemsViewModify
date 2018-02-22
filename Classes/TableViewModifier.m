@@ -68,7 +68,6 @@
         modifyBlock();
     }
     [self.tableView reloadData];
-    [self.tableView.superview layoutIfNeeded];
     if ([self.delegate respondsToSelector:@selector(modifier:didUpdatedView:)]) {
         [self.delegate modifier:self didUpdatedView:self.tableView];
     }
