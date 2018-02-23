@@ -1,0 +1,12 @@
+PODS:
+  - MultipleItemsViewModify (0.0.5)
+
+DEPENDENCIES:
+  - MultipleItemsViewModify
+
+SPEC CHECKSUMS:
+  MultipleItemsViewModify: 6a9c8d9297ca595bc5d878dd251d514e3f4d48a0
+
+PODFILE CHECKSUM: 83575e2582b10a5429c35b60e40e42adb1d0a066
+
+COCOAPODS: 1.4.0

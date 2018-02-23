@@ -13,6 +13,8 @@
 		623F56B3203F407900F43C67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 623F56B2203F407900F43C67 /* Assets.xcassets */; };
 		623F56B6203F407900F43C67 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 623F56B4203F407900F43C67 /* LaunchScreen.storyboard */; };
 		623F56B9203F407900F43C67 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 623F56B8203F407900F43C67 /* main.m */; };
+		623F56C12040085000F43C67 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 623F56C02040085000F43C67 /* Model.m */; };
+		623F56C4204016EE00F43C67 /* KittiesRetriever.m in Sources */ = {isa = PBXBuildFile; fileRef = 623F56C3204016EE00F43C67 /* KittiesRetriever.m */; };
 		EAF7324D99FC86EC1C05EBF6 /* libPods-KittiesCollection.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F7880CE4B02F57D148E9C3 /* libPods-KittiesCollection.a */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +30,10 @@
 		623F56B5203F407900F43C67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		623F56B7203F407900F43C67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		623F56B8203F407900F43C67 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		623F56BF2040085000F43C67 /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		623F56C02040085000F43C67 /* Model.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
+		623F56C2204016EE00F43C67 /* KittiesRetriever.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KittiesRetriever.h; sourceTree = "<group>"; };
+		623F56C3204016EE00F43C67 /* KittiesRetriever.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KittiesRetriever.m; sourceTree = "<group>"; };
 		75F7880CE4B02F57D148E9C3 /* libPods-KittiesCollection.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KittiesCollection.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8456D33B793887C9FAE83E91 /* Pods-KittiesCollection.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KittiesCollection.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KittiesCollection/Pods-KittiesCollection.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,12 +76,24 @@
 				623F56AC203F407900F43C67 /* ViewController.h */,
 				623F56AD203F407900F43C67 /* ViewController.m */,
 				623F56AF203F407900F43C67 /* Main.storyboard */,
+				623F56C5204016FF00F43C67 /* Model */,
 				623F56B2203F407900F43C67 /* Assets.xcassets */,
 				623F56B4203F407900F43C67 /* LaunchScreen.storyboard */,
 				623F56B7203F407900F43C67 /* Info.plist */,
 				623F56B8203F407900F43C67 /* main.m */,
 			);
 			path = KittiesCollection;
+			sourceTree = "<group>";
+		};
+		623F56C5204016FF00F43C67 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				623F56BF2040085000F43C67 /* Model.h */,
+				623F56C02040085000F43C67 /* Model.m */,
+				623F56C2204016EE00F43C67 /* KittiesRetriever.h */,
+				623F56C3204016EE00F43C67 /* KittiesRetriever.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		7064DCBD01AAFFE3E773CA11 /* Frameworks */ = {
@@ -221,8 +239,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				623F56AE203F407900F43C67 /* ViewController.m in Sources */,
+				623F56C4204016EE00F43C67 /* KittiesRetriever.m in Sources */,
 				623F56B9203F407900F43C67 /* main.m in Sources */,
 				623F56AB203F407900F43C67 /* AppDelegate.m in Sources */,
+				623F56C12040085000F43C67 /* Model.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
