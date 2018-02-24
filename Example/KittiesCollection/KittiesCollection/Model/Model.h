@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MultipleItemsViewModify/MultipleItemsViewModifierProtocol.h>
+#import "MultipleItemsViewModifierProtocol.h"
 
 @interface Model : NSObject
 
@@ -16,6 +16,6 @@
 @property (nonatomic, readonly) NSInteger kittiesCount;
 - (NSString *)kittyAtIndex:(NSInteger)index;
 
-- (void)loadMoreKitties;
+- (BOOL)loadMoreKitties;
 
 @end

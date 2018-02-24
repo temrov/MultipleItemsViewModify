@@ -11,12 +11,24 @@
 
 @interface Model()
 
+// basic array that we should display
 @property (nonatomic, strong) NSMutableArray<NSString *> *kitties;
+
+// this guy gets some kitties for us
 @property (nonatomic, strong) KittiesRetriever *retriever;
 
 @end
 
 @implementation Model
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.kitties = [NSMutableArray new];
+        self.retriever = [KittiesRetriever new];
+    }
+    return self;
+}
 
 - (NSInteger)kittiesCount {
     return self.kitties.count;
@@ -26,23 +38,26 @@
     return self.kitties[index];
 }
 
-- (void)loadMoreKitties {
+- (BOOL)loadMoreKitties {
     __weak __typeof__(self) weakSelf = self;
-    [self.retriever retrieveWithCompletion:^(NSArray<NSString *> *kitties) {
+    return [self.retriever retrieveWithCompletion:^(NSArray<NSString *> *kitties) {
         __typeof__(self) strongSelf = weakSelf;
         if (!strongSelf) {
             return;
         }
-//        [strongSelf.viewModifier modifyAnimatedWithUpdateBlock:nil
-//                                                   deleteBlock:nil
-//                                                   insertBlock:^NSArray<NSIndexPath *> * _Nonnull{
-//                                                       NSMutableArray *indexPaths = [NSMutableArray new];
-//                                                       [kitties enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//                                                           [indexPaths addObject:[NSIndexPath indexPathForRow:strongSelf.kitties.count inSection:0]];
-//                                                           [strongSelf.kitties addObject:obj];
-//                                                       }];
-//                                                       return indexPaths;
-//                                                   }];
+        [strongSelf.viewModifier modifyAnimatedWithUpdateBlock:nil
+                                                   deleteBlock:nil
+                                                   insertBlock:^NSArray<NSIndexPath *> * _Nonnull{
+                                                       // just inserting new items
+                                                       NSMutableArray *indexPaths = [NSMutableArray new];
+                                                       [kitties enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                                           [indexPaths addObject:[NSIndexPath indexPathForRow:strongSelf.kitties.count inSection:0]];
+                                                           [strongSelf.kitties addObject:obj];
+                                                       }];
+                                                       // we inserted some items into out array
+                                                       // and now we should update view for synchronizing
+                                                       return indexPaths;
+                                                   }];
     }];
 }
 

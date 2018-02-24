@@ -26,12 +26,12 @@
     return self;
 
 }
-- (void)retrieveWithCompletion:(void (^)(NSArray<NSString *> *kitties))completion {
+- (BOOL)retrieveWithCompletion:(void (^)(NSArray<NSString *> *kitties))completion {
     if (!self.hasNext) {
-        return;
+        return NO;
     }
     if (self.isRetrieving) {
-        return;
+        return NO;
     }
     self.isRetrieving = YES;
     __weak __typeof__(self) weakSelf = self;
@@ -50,10 +50,11 @@
             completion(kitties);
         }
     });
+    return YES;
 }
 
 - (BOOL)hasNext {
-    return self.kittiesRetrieved < 100;
+    return self.kittiesRetrieved < 50;
 }
 
 @end

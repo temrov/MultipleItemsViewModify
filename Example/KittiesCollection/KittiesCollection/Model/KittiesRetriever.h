@@ -12,6 +12,6 @@
 
 @property (nonatomic, readonly) BOOL hasNext;
 
-- (void)retrieveWithCompletion:(void (^)(NSArray<NSString *> *kitties))completion;
+- (BOOL)retrieveWithCompletion:(void (^)(NSArray<NSString *> *kitties))completion;
 
 @end
