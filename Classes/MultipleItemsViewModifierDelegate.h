@@ -3,6 +3,7 @@
 //
 //  Created by Vadim Temnogrudov on 20/02/2018.
 //
+#import <UIKit/UIKit.h>
 
 @protocol MultipleItemsViewModifierProtocol;
 
