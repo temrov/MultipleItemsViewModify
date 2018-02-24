@@ -8,12 +8,12 @@
 
 #import "ViewController.h"
 #import "Model.h"
-#import <TableViewModifier.h>
+#import <TRTableViewModifier.h>
 
-@interface ViewController ()<UITableViewDelegate, UITableViewDataSource, MultipleItemsViewModifierDelegate>
+@interface ViewController ()<UITableViewDelegate, UITableViewDataSource, TRMultipleItemsViewModifierDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *kittiesTableView;
-@property (strong, nonatomic) TableViewModifier *tableViewModifier;
+@property (strong, nonatomic) TRTableViewModifier *tableViewModifier;
 
 @property (weak, nonatomic) IBOutlet UIView *activityIndicatorView;
 @property (weak, nonatomic) IBOutlet UILabel *noContentLabel;
@@ -36,7 +36,7 @@
     [super viewDidLoad];
     
     // Kitties table view becomes a target for our tableViewModifier
-    self.tableViewModifier = [[TableViewModifier alloc] initWithTableView:self.kittiesTableView];
+    self.tableViewModifier = [[TRTableViewModifier alloc] initWithTableView:self.kittiesTableView];
     self.tableViewModifier.delegate = self;
     
     // model interacts with vith view modifier telling him what to do
@@ -64,13 +64,13 @@
     [self tryLoadMoreKittiesIdNeeded];
 }
 
-#pragma mark - MultipleItemsViewModifierDelegate
+#pragma mark - TRMultipleItemsViewModifierDelegate
 
-- (void)modifier:(nonnull NSObject<MultipleItemsViewModifierProtocol> *)modifier willUpdateView:(nullable UIView *)view {
+- (void)modifier:(nonnull NSObject<TRMultipleItemsViewModifierProtocol> *)modifier willUpdateView:(nullable UIView *)view {
     [self hideActivityIndicator];
 }
 
-- (void)modifier:(nonnull NSObject<MultipleItemsViewModifierProtocol> *)modifier didUpdatedView:(nullable UIView *)view {
+- (void)modifier:(nonnull NSObject<TRMultipleItemsViewModifierProtocol> *)modifier didUpdatedView:(nullable UIView *)view {
     [UIView animateWithDuration:0.2 animations:^{
         self.noContentLabel.alpha = self.model.kittiesCount == 0 ? 1.0 : 0.0;
     }];

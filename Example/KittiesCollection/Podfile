@@ -6,5 +6,5 @@ target 'KittiesCollection' do
   # use_frameworks!
 
   # Pods for KittiesCollection
-  pod 'MultipleItemsViewModify', :git => 'https://github.com/temrov/MultipleItemsViewModify.git', :commit => 'bb660bb71aec9af29a5f11cf0967e162143f4b6e'
+  pod 'MultipleItemsViewModify', :git => 'https://github.com/temrov/MultipleItemsViewModify.git', :commit => '6061f42a3f863ecb2dab670224d918e0e7934425'
 end

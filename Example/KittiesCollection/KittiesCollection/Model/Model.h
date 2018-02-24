@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MultipleItemsViewModifierProtocol.h"
+#import <TRMultipleItemsViewModifierProtocol.h>
 
 @interface Model : NSObject
 
-@property (nonatomic, weak) NSObject<MultipleItemsViewModifierProtocol> *viewModifier;
+@property (nonatomic, weak) NSObject<TRMultipleItemsViewModifierProtocol> *viewModifier;
 
 @property (nonatomic, readonly) NSInteger kittiesCount;
 - (NSString *)kittyAtIndex:(NSInteger)index;
