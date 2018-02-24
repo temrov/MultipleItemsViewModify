@@ -1,12 +1,12 @@
 //
-//  TableViewModifier.h
+//  TRTableViewModifier.h
 //
 //  Created by Vadim Temnogrudov on 20/02/2018.
 //
 #import <Foundation/Foundation.h>
-#import "MultipleItemsViewModifierProtocol.h"
+#import "TRMultipleItemsViewModifierProtocol.h"
 
-@interface TableViewModifier : NSObject<MultipleItemsViewModifierProtocol>
+@interface TRTableViewModifier : NSObject<TRMultipleItemsViewModifierProtocol>
 
 @property (nullable, nonatomic, weak) UITableView *tableView;
 

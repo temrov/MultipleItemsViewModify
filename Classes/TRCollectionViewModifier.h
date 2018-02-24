@@ -1,14 +1,14 @@
 //
-//  CollectionViewModifier.h
+//  TRCollectionViewModifier.h
 //  AFNetworking
 //
 //  Created by Vadim Temnogrudov on 22/02/2018.
 //
 
 #import <Foundation/Foundation.h>
-#import "MultipleItemsViewModifierProtocol.h"
+#import "TRMultipleItemsViewModifierProtocol.h"
 
-@interface CollectionViewModifier : NSObject<MultipleItemsViewModifierProtocol>
+@interface TRCollectionViewModifier : NSObject<TRMultipleItemsViewModifierProtocol>
 
 @property (nullable, nonatomic, weak) UICollectionView *collectionView;
 

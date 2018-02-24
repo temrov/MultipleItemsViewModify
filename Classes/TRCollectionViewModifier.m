@@ -1,14 +1,14 @@
 //
-//  CollectionViewModifier.m
+//  TRCollectionViewModifier.m
 //  AFNetworking
 //
 //  Created by Vadim Temnogrudov on 22/02/2018.
 //
 
-#import "CollectionViewModifier.h"
+#import "TRCollectionViewModifier.h"
 
 
-@implementation CollectionViewModifier
+@implementation TRCollectionViewModifier
 @synthesize delegate;
 
 - (nullable instancetype)initWithCollectionView:(nullable UICollectionView *)collectionView {
@@ -19,7 +19,7 @@
     return self;
 }
 
-#pragma mark - MultipleItemsViewModifierProtocol
+#pragma mark - TRMultipleItemsViewModifierProtocol
 
 - (void)modifyAnimatedWithUpdateBlock:(nullable multipleItemsViewModifyBlock)updateBlock
                           deleteBlock:(nullable multipleItemsViewModifyBlock)deleteBlock

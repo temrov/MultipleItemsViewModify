@@ -1,9 +1,9 @@
 //
-//  MultipleItemsViewModifierProtocol.h
+//  TRMultipleItemsViewModifierProtocol.h
 //
 //  Created by Vadim Temnogrudov on 20/02/2018.
 //
-#import "MultipleItemsViewModifierDelegate.h"
+#import "TRMultipleItemsViewModifierDelegate.h"
 
 /**
  * Prototype of modification function.
@@ -20,9 +20,9 @@ typedef NSArray<NSIndexPath *> *_Nonnull (^multipleItemsViewModifyBlock)(void);
  * Object allows performing safe modifications of view and model atomically
  * that prevents from inconsistency crashes.
  */
-@protocol MultipleItemsViewModifierProtocol
+@protocol TRMultipleItemsViewModifierProtocol
 
-@property (nullable, nonatomic, weak) NSObject<MultipleItemsViewModifierDelegate> *delegate;
+@property (nullable, nonatomic, weak) NSObject<TRMultipleItemsViewModifierDelegate> *delegate;
 
 /**
  * Method performs animated model and view modifications atomically.

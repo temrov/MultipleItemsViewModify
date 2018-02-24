@@ -1,12 +1,12 @@
 //
-//  TableViewModifier.m
+//  TRTableViewModifier.m
 //
 //  Created by Vadim Temnogrudov on 20/02/2018.
 //
 
-#import "TableViewModifier.h"
+#import "TRTableViewModifier.h"
 
-@implementation TableViewModifier
+@implementation TRTableViewModifier
 @synthesize delegate;
 
 - (instancetype)initWithTableView:(UITableView *)tableView {
@@ -17,7 +17,7 @@
     return self;
 }
 
-#pragma mark - MultipleItemsViewModifierProtocol
+#pragma mark - TRMultipleItemsViewModifierProtocol
 
 - (void)modifyAnimatedWithUpdateBlock:(nullable multipleItemsViewModifyBlock)updateBlock
                           deleteBlock:(nullable multipleItemsViewModifyBlock)deleteBlock

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "MultipleItemsViewModify"
-  s.version      = "0.0.6"
+  s.version      = "0.0.7"
   s.summary      = "MultipleItemsViewModify helps developers to modify views for displaying data arrays (UITableView or UICollectionView for example)."
   s.homepage     = "https://github.com/temrov/MultipleItemsViewModify"
   s.license               = { :type => 'MIT', :file => 'LICENSE' }
