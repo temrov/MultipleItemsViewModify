@@ -1,6 +1,6 @@
 //
 //  TRCollectionViewModifier.m
-//  AFNetworking
+//  MultipleItemsViewModify
 //
 //  Created by Vadim Temnogrudov on 22/02/2018.
 //

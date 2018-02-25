@@ -1,5 +1,6 @@
 //
 //  TRMultipleItemsViewModifierDelegate.h
+//  MultipleItemsViewModify
 //
 //  Created by Vadim Temnogrudov on 20/02/2018.
 //
