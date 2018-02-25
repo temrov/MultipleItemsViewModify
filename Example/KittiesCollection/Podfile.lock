@@ -1,22 +1,12 @@
 PODS:
-  - MultipleItemsViewModify (0.1.0)
+  - MultipleItemsViewModify (0.1.1)
 
 DEPENDENCIES:
-  - MultipleItemsViewModify (from `https://github.com/temrov/MultipleItemsViewModify.git`, commit `9cc2962a82b0242c6d19791c68102b6b34d8c4b8`)
-
-EXTERNAL SOURCES:
-  MultipleItemsViewModify:
-    :commit: 9cc2962a82b0242c6d19791c68102b6b34d8c4b8
-    :git: https://github.com/temrov/MultipleItemsViewModify.git
-
-CHECKOUT OPTIONS:
-  MultipleItemsViewModify:
-    :commit: 9cc2962a82b0242c6d19791c68102b6b34d8c4b8
-    :git: https://github.com/temrov/MultipleItemsViewModify.git
+  - MultipleItemsViewModify (= 0.1.1)
 
 SPEC CHECKSUMS:
-  MultipleItemsViewModify: 10f40722b2de2bb0ff1edb57860b72119d70a764
+  MultipleItemsViewModify: a4e40d34abccdb9fc743098e8b26f6378f487468
 
-PODFILE CHECKSUM: 9d92dc81519f34abb71040490d705f9232556bd6
+PODFILE CHECKSUM: eb92cd69ce00f1338645da0ca0bb47cb675c83fc
 
 COCOAPODS: 1.4.0
