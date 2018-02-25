@@ -20,6 +20,6 @@
 
 - (BOOL)loadMoreKitties;
 - (void)shuffleKitties;
-- (BOOL)reset;
+- (void)reset;
 
 @end
