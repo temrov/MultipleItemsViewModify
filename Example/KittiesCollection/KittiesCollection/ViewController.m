@@ -40,7 +40,7 @@
     self.tableViewModifier = [[TRTableViewModifier alloc] initWithTableView:self.kittiesTableView];
     self.tableViewModifier.delegate = self;
     
-    // model interacts with vith view modifier telling him what to do
+    // model interacts with view modifier telling him what to do
     self.model.viewModifier = self.tableViewModifier;
     
     [self tryLoadMoreKittiesIdNeeded];
