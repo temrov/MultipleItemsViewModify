@@ -17,6 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *activityIndicatorView;
 @property (weak, nonatomic) IBOutlet UILabel *noContentLabel;
+@property (weak, nonatomic) IBOutlet UIButton *resetButton;
 
 @property (strong, nonatomic) Model *model;
 
@@ -74,8 +75,19 @@
     [UIView animateWithDuration:0.2 animations:^{
         self.noContentLabel.alpha = self.model.kittiesCount == 0 ? 1.0 : 0.0;
     }];
+    self.resetButton.enabled = !self.model.hasNext;
     // items are inserted and may be we have some space to display more of them
     [self tryLoadMoreKittiesIdNeeded];
+}
+
+#pragma mark - Actions
+
+- (IBAction)resetDidTapped:(id)sender {
+    [self.model reset];
+}
+
+- (IBAction)shuffleDidTapped:(id)sender {
+    [self.model shuffleKitties];
 }
 
 #pragma mark - Actitvity indicator view

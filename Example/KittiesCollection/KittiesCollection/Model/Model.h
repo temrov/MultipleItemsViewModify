@@ -13,9 +13,13 @@
 
 @property (nonatomic, weak) NSObject<TRMultipleItemsViewModifierProtocol> *viewModifier;
 
+@property (nonatomic, readonly) BOOL hasNext;
+
 @property (nonatomic, readonly) NSInteger kittiesCount;
 - (NSString *)kittyAtIndex:(NSInteger)index;
 
 - (BOOL)loadMoreKitties;
+- (void)shuffleKitties;
+- (BOOL)reset;
 
 @end

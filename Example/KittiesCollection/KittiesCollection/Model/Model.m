@@ -8,7 +8,7 @@
 
 #import "Model.h"
 #import "KittiesRetriever.h"
-
+#include <stdlib.h>
 @interface Model()
 
 // basic array that we should display
@@ -28,6 +28,10 @@
         self.retriever = [KittiesRetriever new];
     }
     return self;
+}
+
+- (BOOL)hasNext {
+    return self.retriever.hasNext;
 }
 
 - (NSInteger)kittiesCount {
@@ -59,6 +63,70 @@
                                                        return indexPaths;
                                                    }];
     }];
+}
+
+- (void)shuffleKitties {
+
+    __weak __typeof__(self) weakSelf = self;
+    [self.viewModifier modifyAnimatedWithMoveBlock:^NSArray<TRMoveItemInfo *> *{
+        __typeof__(self) strongSelf = weakSelf;
+        if (!strongSelf) {
+            return nil;
+        }
+        NSMutableArray<TRMoveItemInfo *> *moveItems = [strongSelf indexesToMove];
+        [moveItems enumerateObjectsUsingBlock:^(TRMoveItemInfo * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [strongSelf.kitties exchangeObjectAtIndex:obj.fromIndex.row withObjectAtIndex:obj.toIndex.row];
+        }];
+        return moveItems;
+    }];
+}
+
+- (void)reset {
+    __weak __typeof__(self) weakSelf = self;
+    [self.viewModifier modifyNotAnimatedWithBlock:^{
+        __typeof__(self) strongSelf = weakSelf;
+        if (!strongSelf) {
+            return;
+        }
+        [strongSelf.retriever reset];
+        [strongSelf.kitties removeAllObjects];
+    }];
+}
+
+#pragma mark - Shuffle helper
+
+- (NSMutableArray<TRMoveItemInfo *> *)indexesToMove {
+    NSMutableArray<TRMoveItemInfo *> *moveItems = [NSMutableArray new];
+    [self.kitties enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        TRMoveItemInfo *moveItemInfo = [TRMoveItemInfo new];
+        moveItemInfo.fromIndex = [NSIndexPath indexPathForRow:idx inSection:0];
+        NSUInteger toIndex = [self moveToIndexForMoveArray:moveItems];
+        moveItemInfo.toIndex = [NSIndexPath indexPathForRow:toIndex inSection:0];
+        [moveItems addObject:moveItemInfo];
+    }];
+    return moveItems;
+}
+
+- (NSUInteger)moveToIndexForMoveArray:(NSMutableArray<TRMoveItemInfo *> *)moveItems {
+    NSUInteger targetIndex = arc4random_uniform((int)self.kitties.count);
+    return [self findNextEmptySlotForItemIndex:targetIndex inMoveArray:moveItems];
+}
+
+- (NSUInteger)findNextEmptySlotForItemIndex:(NSUInteger)index inMoveArray:(NSMutableArray<TRMoveItemInfo *> *)moveItems {
+    __block BOOL isEmptySlot = YES;
+    [moveItems enumerateObjectsUsingBlock:^(TRMoveItemInfo * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.toIndex.row == index) {
+            isEmptySlot = NO;
+            *stop = YES;
+        }
+    }];
+    if (isEmptySlot) {
+        // to Index is free now
+        return index;
+    }
+    // recursive search for 'to' position
+    NSUInteger nextIndexToCheck = (index + 1) % self.kitties.count;
+    return [self findNextEmptySlotForItemIndex:nextIndexToCheck inMoveArray:moveItems];
 }
 
 @end

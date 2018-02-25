@@ -57,4 +57,11 @@
     return self.kittiesRetrieved < 50;
 }
 
+- (void)reset {
+    if (self.hasNext) {
+        return;
+    }
+    self.kittiesRetrieved = 0;
+}
+
 @end

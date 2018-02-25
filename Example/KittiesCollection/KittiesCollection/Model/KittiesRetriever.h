@@ -14,4 +14,6 @@
 
 - (BOOL)retrieveWithCompletion:(void (^)(NSArray<NSString *> *kitties))completion;
 
+- (void)reset;
+
 @end
