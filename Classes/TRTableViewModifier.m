@@ -60,6 +60,33 @@
     [CATransaction commit];
 }
 
+- (void)modifyAnimatedWithMoveBlock:(NSArray<TRMoveItemInfo *> *(^_Nullable)(void))moveBlock {
+    
+    if ([self.delegate respondsToSelector:@selector(modifier:willUpdateView:)]) {
+        [self.delegate modifier:self willUpdateView:self.tableView];
+    }
+    __weak __typeof__(self) weakSelf = self;
+    [CATransaction begin];
+    [CATransaction setCompletionBlock:^{
+        if ([weakSelf.delegate respondsToSelector:@selector(modifier:didUpdatedView:)]) {
+            [weakSelf.delegate modifier:weakSelf didUpdatedView:weakSelf.tableView];
+        }
+    }];
+    
+    [self.tableView beginUpdates];
+    
+    if (moveBlock) {
+        NSArray<TRMoveItemInfo *> *moveItemsInfo = moveBlock();
+        [moveItemsInfo enumerateObjectsUsingBlock:^(TRMoveItemInfo * _Nonnull moveItem, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.tableView moveRowAtIndexPath:moveItem.fromIndex toIndexPath:moveItem.toIndex];
+        }];
+    }
+    
+    [self.tableView endUpdates];
+    
+    [CATransaction commit];
+}
+
 - (void)modifyNotAnimatedWithBlock:(void (^_Nullable)(void))modifyBlock {
     if ([self.delegate respondsToSelector:@selector(modifier:willUpdateView:)]) {
         [self.delegate modifier:self willUpdateView:self.tableView];

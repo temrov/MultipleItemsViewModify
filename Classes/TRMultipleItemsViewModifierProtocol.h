@@ -4,6 +4,7 @@
 //  Created by Vadim Temnogrudov on 20/02/2018.
 //
 #import "TRMultipleItemsViewModifierDelegate.h"
+#import "TRMoveItemInfo.h"
 
 /**
  * Prototype of modification function.
@@ -22,6 +23,7 @@ typedef NSArray<NSIndexPath *> *_Nonnull (^multipleItemsViewModifyBlock)(void);
  */
 @protocol TRMultipleItemsViewModifierProtocol
 
+@required
 @property (nullable, nonatomic, weak) NSObject<TRMultipleItemsViewModifierDelegate> *delegate;
 
 /**
@@ -34,6 +36,9 @@ typedef NSArray<NSIndexPath *> *_Nonnull (^multipleItemsViewModifyBlock)(void);
 - (void)modifyAnimatedWithUpdateBlock:(nullable multipleItemsViewModifyBlock)updateBlock
                           deleteBlock:(nullable multipleItemsViewModifyBlock)deleteBlock
                           insertBlock:(nullable multipleItemsViewModifyBlock)insertBlock;
+
+// Move cells in view
+- (void)modifyAnimatedWithMoveBlock:(NSArray<TRMoveItemInfo *> *(^_Nullable)(void))moveBlock;
 
 // Atomically view and model modifying without any animation
 - (void)modifyNotAnimatedWithBlock:(void (^_Nullable)(void))modifyBlock;

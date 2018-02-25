@@ -59,6 +59,31 @@
     }];
 }
 
+- (void)modifyAnimatedWithMoveBlock:(NSArray<TRMoveItemInfo *> *(^_Nullable)(void))moveBlock {
+    if ([self.delegate respondsToSelector:@selector(modifier:willUpdateView:)]) {
+        [self.delegate modifier:self willUpdateView:self.collectionView];
+    }
+    __weak __typeof__(self) weakSelf = self;
+    [self.collectionView performBatchUpdates:^{
+        if (moveBlock) {
+            NSArray<TRMoveItemInfo *> *moveItemsInfo = moveBlock();
+            [moveItemsInfo enumerateObjectsUsingBlock:^(TRMoveItemInfo * _Nonnull moveItem, NSUInteger idx, BOOL * _Nonnull stop) {
+                [self.collectionView moveItemAtIndexPath:moveItem.fromIndex toIndexPath:moveItem.toIndex];
+            }];
+        }
+    } completion:^(BOOL finished) {
+        __typeof__(self) strongSelf = weakSelf;
+        if (!strongSelf) {
+            return;
+        }
+        if ([strongSelf.delegate respondsToSelector:@selector(modifier:didUpdatedView:)]) {
+            [strongSelf.delegate modifier:strongSelf didUpdatedView:strongSelf.collectionView];
+        }
+    }];
+}
+
+
+
 - (void)modifyNotAnimatedWithBlock:(void (^_Nullable)(void))modifyBlock {
     if ([self.delegate respondsToSelector:@selector(modifier:willUpdateView:)]) {
         [self.delegate modifier:self willUpdateView:self.collectionView];
