@@ -12,7 +12,7 @@
  * Result of this function is array of items (their index paths)
  * that had been modified in this block and should been modified in view.
  */
-typedef NSArray<NSIndexPath *> *_Nonnull (^multipleItemsViewModifyBlock)(void);
+typedef NSArray<NSIndexPath *> *_Nullable (^multipleItemsViewModifyBlock)(void);
 
 
 /**
@@ -38,9 +38,10 @@ typedef NSArray<NSIndexPath *> *_Nonnull (^multipleItemsViewModifyBlock)(void);
                           insertBlock:(nullable multipleItemsViewModifyBlock)insertBlock;
 
 // Move cells in view
-- (void)modifyAnimatedWithMoveBlock:(NSArray<TRMoveItemInfo *> *(^_Nullable)(void))moveBlock;
+- (void)modifyAnimatedWithMoveBlock:(NSArray<TRMoveItemInfo *> *_Nullable(^_Nullable)(void))moveBlock;
 
 // Atomically view and model modifying without any animation
 - (void)modifyNotAnimatedWithBlock:(void (^_Nullable)(void))modifyBlock;
 
 @end
+
