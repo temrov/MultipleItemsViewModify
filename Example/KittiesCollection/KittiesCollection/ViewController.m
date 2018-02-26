@@ -10,6 +10,8 @@
 #import "Model.h"
 #import <TRTableViewModifier.h>
 
+static CGFloat const kAnimationTimeDefault = 0.2;
+
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource, TRMultipleItemsViewModifierDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *kittiesTableView;
@@ -43,7 +45,7 @@
     // model interacts with view modifier telling him what to do
     self.model.viewModifier = self.tableViewModifier;
     
-    [self tryLoadMoreKittiesIdNeeded];
+    [self tryLoadMoreKittiesIfNeeded];
 }
 
 #pragma mark - UITableViewDataSource
@@ -62,22 +64,21 @@
 #pragma mark - UITableViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self tryLoadMoreKittiesIdNeeded];
+    [self tryLoadMoreKittiesIfNeeded];
 }
 
 #pragma mark - TRMultipleItemsViewModifierDelegate
 
 - (void)modifier:(nonnull NSObject<TRMultipleItemsViewModifierProtocol> *)modifier willUpdateView:(nullable UIView *)view {
     [self hideActivityIndicator];
+    [self setNoContentLabelVisible:NO];
 }
 
 - (void)modifier:(nonnull NSObject<TRMultipleItemsViewModifierProtocol> *)modifier didUpdatedView:(nullable UIView *)view {
-    [UIView animateWithDuration:0.2 animations:^{
-        self.noContentLabel.alpha = self.model.kittiesCount == 0 ? 1.0 : 0.0;
-    }];
+    [self setNoContentLabelVisible:!self.model.kittiesCount];
     self.resetButton.enabled = !self.model.hasNext;
     // items are inserted and may be we have some space to display more of them
-    [self tryLoadMoreKittiesIdNeeded];
+    [self tryLoadMoreKittiesIfNeeded];
 }
 
 #pragma mark - Actions
@@ -93,20 +94,26 @@
 #pragma mark - Actitvity indicator view
 
 - (void)showActivityIndicator {
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:kAnimationTimeDefault animations:^{
         self.activityIndicatorView.alpha = 1.0;
     }];
 }
 
 - (void)hideActivityIndicator {
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:kAnimationTimeDefault animations:^{
         self.activityIndicatorView.alpha = 0.0;
+    }];
+}
+
+- (void)setNoContentLabelVisible:(BOOL)visible {
+    [UIView animateWithDuration:kAnimationTimeDefault animations:^{
+        self.noContentLabel.alpha = visible ? 1.0 : 0.0;
     }];
 }
 
 #pragma mark - Others
 
-- (void)tryLoadMoreKittiesIdNeeded {
+- (void)tryLoadMoreKittiesIfNeeded {
     if ([self isNeedMoreKitties]) {
         if ([self.model loadMoreKitties]) {
             [self showActivityIndicator];
