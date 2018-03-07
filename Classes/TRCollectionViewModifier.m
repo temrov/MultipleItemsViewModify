@@ -28,14 +28,20 @@
         [self.delegate modifier:self willUpdateView:self.collectionView];
     }
     __weak __typeof__(self) weakSelf = self;
+    [UIView animateWithDuration:0 animations:^{
+        [self.collectionView performBatchUpdates:^{
+            NSArray<NSIndexPath *> *indexPaths = nil;
+            if (updateBlock) {
+                indexPaths = updateBlock();
+                if (indexPaths) {
+                    [self.collectionView reloadItemsAtIndexPaths:indexPaths];
+                }
+            }
+        } completion:nil];
+    }];
+    
     [self.collectionView performBatchUpdates:^{
         NSArray<NSIndexPath *> *indexPaths = nil;
-        if (updateBlock) {
-            indexPaths = updateBlock();
-            if (indexPaths) {
-                [self.collectionView reloadItemsAtIndexPaths:indexPaths];
-            }
-        }
         if (deleteBlock) {
             indexPaths = deleteBlock();
             if (indexPaths) {
@@ -98,3 +104,4 @@
 }
 
 @end
+
