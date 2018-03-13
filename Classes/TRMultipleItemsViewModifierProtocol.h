@@ -15,6 +15,10 @@
  */
 typedef NSArray<NSIndexPath *> *_Nullable (^multipleItemsViewModifyBlock)(void);
 
+/**
+ * Prototype of modification completion function.
+ */
+typedef  void (^multipleItemsViewModifyCompletionBlock)(BOOL finished);
 
 /**
  * Controller-side object that performs routine update/delete/insert
@@ -36,13 +40,17 @@ typedef NSArray<NSIndexPath *> *_Nullable (^multipleItemsViewModifyBlock)(void);
  */
 - (void)modifyAnimatedWithUpdateBlock:(nullable multipleItemsViewModifyBlock)updateBlock
                           deleteBlock:(nullable multipleItemsViewModifyBlock)deleteBlock
-                          insertBlock:(nullable multipleItemsViewModifyBlock)insertBlock;
+                          insertBlock:(nullable multipleItemsViewModifyBlock)insertBlock
+                      completionBlock:(nullable multipleItemsViewModifyCompletionBlock)completionBlock;
+
 
 // Move cells in view
-- (void)modifyAnimatedWithMoveBlock:(NSArray<TRMoveItemInfo *> *_Nullable(^_Nullable)(void))moveBlock;
+- (void)modifyAnimatedWithMoveBlock:(NSArray<TRMoveItemInfo *> *_Nullable(^_Nullable)(void))moveBlock
+                    completionBlock:(nullable multipleItemsViewModifyCompletionBlock)completionBlock;
 
 // Atomically view and model modifying without any animation
-- (void)modifyNotAnimatedWithBlock:(void (^_Nullable)(void))modifyBlock;
+- (void)modifyNotAnimatedWithBlock:(void (^_Nullable)(void))modifyBlock
+                   completionBlock:(nullable multipleItemsViewModifyCompletionBlock)completionBlock;
 
 @end
 

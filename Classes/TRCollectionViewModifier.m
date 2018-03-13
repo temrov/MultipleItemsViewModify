@@ -23,7 +23,8 @@
 
 - (void)modifyAnimatedWithUpdateBlock:(nullable multipleItemsViewModifyBlock)updateBlock
                           deleteBlock:(nullable multipleItemsViewModifyBlock)deleteBlock
-                          insertBlock:(nullable multipleItemsViewModifyBlock)insertBlock {
+                          insertBlock:(nullable multipleItemsViewModifyBlock)insertBlock
+                      completionBlock:(nullable multipleItemsViewModifyCompletionBlock)completionBlock{
     if ([self.delegate respondsToSelector:@selector(modifier:willUpdateView:)]) {
         [self.delegate modifier:self willUpdateView:self.collectionView];
     }
@@ -62,10 +63,14 @@
         if ([strongSelf.delegate respondsToSelector:@selector(modifier:didUpdatedView:)]) {
             [strongSelf.delegate modifier:strongSelf didUpdatedView:strongSelf.collectionView];
         }
+        if (completionBlock) {
+            completionBlock(finished);
+        }
     }];
 }
 
-- (void)modifyAnimatedWithMoveBlock:(NSArray<TRMoveItemInfo *> *(^_Nullable)(void))moveBlock {
+- (void)modifyAnimatedWithMoveBlock:(NSArray<TRMoveItemInfo *> *(^_Nullable)(void))moveBlock
+                    completionBlock:(nullable multipleItemsViewModifyCompletionBlock)completionBlock{
     if ([self.delegate respondsToSelector:@selector(modifier:willUpdateView:)]) {
         [self.delegate modifier:self willUpdateView:self.collectionView];
     }
@@ -85,12 +90,16 @@
         if ([strongSelf.delegate respondsToSelector:@selector(modifier:didUpdatedView:)]) {
             [strongSelf.delegate modifier:strongSelf didUpdatedView:strongSelf.collectionView];
         }
+        if (completionBlock) {
+            completionBlock(finished);
+        }
     }];
 }
 
 
 
-- (void)modifyNotAnimatedWithBlock:(void (^_Nullable)(void))modifyBlock {
+- (void)modifyNotAnimatedWithBlock:(void (^_Nullable)(void))modifyBlock
+                   completionBlock:(nullable multipleItemsViewModifyCompletionBlock)completionBlock{
     if ([self.delegate respondsToSelector:@selector(modifier:willUpdateView:)]) {
         [self.delegate modifier:self willUpdateView:self.collectionView];
     }
@@ -98,8 +107,13 @@
         modifyBlock();
     }
     [self.collectionView reloadData];
+    [self.collectionView layoutIfNeeded];
+    
     if ([self.delegate respondsToSelector:@selector(modifier:didUpdatedView:)]) {
         [self.delegate modifier:self didUpdatedView:self.collectionView];
+    }
+    if (completionBlock) {
+        completionBlock(YES);
     }
 }
 
