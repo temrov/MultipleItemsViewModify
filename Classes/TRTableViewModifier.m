@@ -33,13 +33,13 @@
     __weak __typeof__(self) weakSelf = self;
     [CATransaction begin];
     [CATransaction setCompletionBlock:^{
+        strongTableView = nil;
         if ([weakSelf.delegate respondsToSelector:@selector(modifier:didUpdatedView:)]) {
             [weakSelf.delegate modifier:weakSelf didUpdatedView:weakSelf.tableView];
         }
         if (completionBlock) {
             completionBlock(YES);
         }
-        strongTableView = nil;
     }];
     
     [self.tableView beginUpdates];
@@ -74,9 +74,12 @@
     if ([self.delegate respondsToSelector:@selector(modifier:willUpdateView:)]) {
         [self.delegate modifier:self willUpdateView:self.tableView];
     }
+    // retaining view to prevent from destroying it while animaiton is in flight
+    __block UITableView *strongTableView = self.tableView;
     __weak __typeof__(self) weakSelf = self;
     [CATransaction begin];
     [CATransaction setCompletionBlock:^{
+        strongTableView = nil;
         if ([weakSelf.delegate respondsToSelector:@selector(modifier:didUpdatedView:)]) {
             [weakSelf.delegate modifier:weakSelf didUpdatedView:weakSelf.tableView];
         }

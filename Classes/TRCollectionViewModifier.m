@@ -77,6 +77,8 @@
     if ([self.delegate respondsToSelector:@selector(modifier:willUpdateView:)]) {
         [self.delegate modifier:self willUpdateView:self.collectionView];
     }
+    // retaining view to prevent from destroying it while animaiton is in flight
+    __block UICollectionView *strongCollectionView = self.collectionView;
     __weak __typeof__(self) weakSelf = self;
     [self.collectionView performBatchUpdates:^{
         if (moveBlock) {
@@ -86,6 +88,7 @@
             }];
         }
     } completion:^(BOOL finished) {
+        strongCollectionView = nil;
         __typeof__(self) strongSelf = weakSelf;
         if (!strongSelf) {
             return;
