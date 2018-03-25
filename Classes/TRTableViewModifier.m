@@ -28,6 +28,8 @@
     if ([self.delegate respondsToSelector:@selector(modifier:willUpdateView:)]) {
         [self.delegate modifier:self willUpdateView:self.tableView];
     }
+    // retaining view to prevent from destroying it while animaiton is in flight
+    UITableView *strongTableView = self.tableView;
     __weak __typeof__(self) weakSelf = self;
     [CATransaction begin];
     [CATransaction setCompletionBlock:^{
@@ -37,6 +39,7 @@
         if (completionBlock) {
             completionBlock(YES);
         }
+        strongTableView = nil;
     }];
     
     [self.tableView beginUpdates];

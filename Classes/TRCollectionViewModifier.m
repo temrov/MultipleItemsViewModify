@@ -28,6 +28,8 @@
     if ([self.delegate respondsToSelector:@selector(modifier:willUpdateView:)]) {
         [self.delegate modifier:self willUpdateView:self.collectionView];
     }
+    // retaining view to prevent from destroying it while animaiton is in flight
+    UICollectionView *strongCollectionView = self.collectionView;
     __weak __typeof__(self) weakSelf = self;
     [UIView animateWithDuration:0 animations:^{
         [self.collectionView performBatchUpdates:^{
@@ -56,6 +58,7 @@
             }
         }
     } completion:^(BOOL finished) {
+        strongCollectionView = nil;
         __typeof__(self) strongSelf = weakSelf;
         if (!strongSelf) {
             return;
