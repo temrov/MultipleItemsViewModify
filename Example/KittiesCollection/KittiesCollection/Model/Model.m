@@ -61,7 +61,7 @@
                                                        // we inserted some items into out array
                                                        // and now we should update view for synchronizing
                                                        return indexPaths;
-                                                   }];
+                                                   } completionBlock:nil];
     }];
 }
 
@@ -78,7 +78,7 @@
             [strongSelf.kitties exchangeObjectAtIndex:obj.fromIndex.row withObjectAtIndex:obj.toIndex.row];
         }];
         return moveItems;
-    }];
+    } completionBlock:nil];
 }
 
 - (void)reset {
@@ -90,7 +90,7 @@
         }
         [strongSelf.retriever reset];
         [strongSelf.kitties removeAllObjects];
-    }];
+    } completionBlock:nil];
 }
 
 #pragma mark - Shuffle helper
