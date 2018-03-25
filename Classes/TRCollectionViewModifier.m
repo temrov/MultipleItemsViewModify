@@ -29,7 +29,7 @@
         [self.delegate modifier:self willUpdateView:self.collectionView];
     }
     // retaining view to prevent from destroying it while animaiton is in flight
-    UICollectionView *strongCollectionView = self.collectionView;
+    __block UICollectionView *strongCollectionView = self.collectionView;
     __weak __typeof__(self) weakSelf = self;
     [UIView animateWithDuration:0 animations:^{
         [self.collectionView performBatchUpdates:^{
