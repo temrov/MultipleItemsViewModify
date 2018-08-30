@@ -21,13 +21,27 @@
 
 #pragma mark - TRMultipleItemsViewModifierProtocol
 
-- (void)modifyAnimatedWithUpdateBlock:(nullable multipleItemsViewModifyBlock)updateBlock
-                          deleteBlock:(nullable multipleItemsViewModifyBlock)deleteBlock
-                          insertBlock:(nullable multipleItemsViewModifyBlock)insertBlock
-                      completionBlock:(nullable multipleItemsViewModifyCompletionBlock)completionBlock{
+- (void)modifyAnimated:(BOOL)animated
+           updateBlock:(nullable multipleItemsViewModifyBlock)updateBlock
+           deleteBlock:(nullable multipleItemsViewModifyBlock)deleteBlock
+           insertBlock:(nullable multipleItemsViewModifyBlock)insertBlock
+       completionBlock:(nullable multipleItemsViewModifyCompletionBlock)completionBlock {
     if ([self.delegate respondsToSelector:@selector(modifier:willUpdateView:)]) {
         [self.delegate modifier:self willUpdateView:self.collectionView];
     }
+    if (!animated) {
+        [UIView performWithoutAnimation: ^{
+            [self _modifyWithUpdateBlock:updateBlock deleteBlock: deleteBlock insertBlock: insertBlock completionBlock: completionBlock];
+        }];
+        return;
+    }
+    [self _modifyWithUpdateBlock:updateBlock deleteBlock: deleteBlock insertBlock: insertBlock completionBlock: completionBlock];
+}
+
+- (void)_modifyWithUpdateBlock:(nullable multipleItemsViewModifyBlock)updateBlock
+            deleteBlock:(nullable multipleItemsViewModifyBlock)deleteBlock
+            insertBlock:(nullable multipleItemsViewModifyBlock)insertBlock
+               completionBlock:(nullable multipleItemsViewModifyCompletionBlock)completionBlock {
     // retaining view to prevent from destroying it while animaiton is in flight
     __block UICollectionView *strongCollectionView = self.collectionView;
     __weak __typeof__(self) weakSelf = self;
@@ -70,6 +84,12 @@
             completionBlock(finished);
         }
     }];
+}
+- (void)modifyAnimatedWithUpdateBlock:(nullable multipleItemsViewModifyBlock)updateBlock
+                          deleteBlock:(nullable multipleItemsViewModifyBlock)deleteBlock
+                          insertBlock:(nullable multipleItemsViewModifyBlock)insertBlock
+                      completionBlock:(nullable multipleItemsViewModifyCompletionBlock)completionBlock {
+    [self modifyAnimated: YES updateBlock: updateBlock deleteBlock: deleteBlock insertBlock: insertBlock completionBlock: completionBlock];
 }
 
 - (void)modifyAnimatedWithMoveBlock:(NSArray<TRMoveItemInfo *> *(^_Nullable)(void))moveBlock

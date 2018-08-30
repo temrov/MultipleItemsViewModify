@@ -52,5 +52,11 @@ typedef  void (^multipleItemsViewModifyCompletionBlock)(BOOL finished);
 - (void)modifyNotAnimatedWithBlock:(void (^_Nullable)(void))modifyBlock
                    completionBlock:(nullable multipleItemsViewModifyCompletionBlock)completionBlock;
 
+- (void)modifyAnimated:(BOOL)animated
+           updateBlock:(nullable multipleItemsViewModifyBlock)updateBlock
+           deleteBlock:(nullable multipleItemsViewModifyBlock)deleteBlock
+           insertBlock:(nullable multipleItemsViewModifyBlock)insertBlock
+       completionBlock:(nullable multipleItemsViewModifyCompletionBlock)completionBlock;
+
 @end
 

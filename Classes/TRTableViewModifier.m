@@ -20,11 +20,11 @@
 
 #pragma mark - TRMultipleItemsViewModifierProtocol
 
-- (void)modifyAnimatedWithUpdateBlock:(nullable multipleItemsViewModifyBlock)updateBlock
-                          deleteBlock:(nullable multipleItemsViewModifyBlock)deleteBlock
-                          insertBlock:(nullable multipleItemsViewModifyBlock)insertBlock
-                      completionBlock:(nullable multipleItemsViewModifyCompletionBlock)completionBlock{
-    
+- (void)modifyAnimated:(BOOL)animated
+           updateBlock:(nullable multipleItemsViewModifyBlock)updateBlock
+           deleteBlock:(nullable multipleItemsViewModifyBlock)deleteBlock
+           insertBlock:(nullable multipleItemsViewModifyBlock)insertBlock
+       completionBlock:(nullable multipleItemsViewModifyCompletionBlock)completionBlock {
     if ([self.delegate respondsToSelector:@selector(modifier:willUpdateView:)]) {
         [self.delegate modifier:self willUpdateView:self.tableView];
     }
@@ -66,6 +66,12 @@
     [self.tableView endUpdates];
     
     [CATransaction commit];
+}
+- (void)modifyAnimatedWithUpdateBlock:(nullable multipleItemsViewModifyBlock)updateBlock
+                          deleteBlock:(nullable multipleItemsViewModifyBlock)deleteBlock
+                          insertBlock:(nullable multipleItemsViewModifyBlock)insertBlock
+                      completionBlock:(nullable multipleItemsViewModifyCompletionBlock)completionBlock{
+    [self modifyAnimated: YES updateBlock: updateBlock deleteBlock: deleteBlock insertBlock: insertBlock completionBlock: completionBlock];
 }
 
 - (void)modifyAnimatedWithMoveBlock:(NSArray<TRMoveItemInfo *> *(^_Nullable)(void))moveBlock
